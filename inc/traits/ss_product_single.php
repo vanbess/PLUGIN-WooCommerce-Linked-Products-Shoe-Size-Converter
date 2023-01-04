@@ -147,15 +147,8 @@ if (!trait_exists('SS_Product_Single')) :
                             $(this).addClass('ss_active');
                             var selected = $(this).text();
 
-                            console.log(selected);
-                            
-
                             // set EU sizes
                             if (selected === 'EU') {
-
-console.log(eu_s);
-
-
                                 $('.product-variations.list-type.pa_size > button').each(function(i, el) {
                                     $(el).text(eu_s[i]);
                                 })
