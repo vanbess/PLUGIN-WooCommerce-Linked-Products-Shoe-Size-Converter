@@ -54,10 +54,10 @@ if (!trait_exists('SS_Product_Single')) :
             // hidden inputs to ref default size setting etc
 ?>
             <input type="hidden" id="ss_size_desig" value="<?php echo $def_size_desig; ?>">
-            <input type="hidden" id="ss_eu" value="<?php echo base64_encode(json_encode($eu_s)) ?>">
-            <input type="hidden" id="ss_us" value="<?php echo base64_encode(json_encode($us_s)) ?>">
-            <input type="hidden" id="ss_uk" value="<?php echo base64_encode(json_encode($uk_s)) ?>">
-            <input type="hidden" id="ss_jp" value="<?php echo base64_encode(json_encode($jp_s)) ?>">
+            <input type="hidden" id="ss_eu_i" value="<?php echo base64_encode(json_encode($eu_s)) ?>">
+            <input type="hidden" id="ss_us_i" value="<?php echo base64_encode(json_encode($us_s)) ?>">
+            <input type="hidden" id="ss_uk_i" value="<?php echo base64_encode(json_encode($uk_s)) ?>">
+            <input type="hidden" id="ss_jp_i" value="<?php echo base64_encode(json_encode($jp_s)) ?>">
 
         <?php
         }
@@ -94,10 +94,10 @@ if (!trait_exists('SS_Product_Single')) :
                         $('.product-variations.list-type.pa_size').prepend(to_append);
 
                         // retrieve all size settings
-                        var eu_s = JSON.parse(atob($('#ss_eu').val()));
-                        var us_s = JSON.parse(atob($('#ss_us').val()));
-                        var uk_s = JSON.parse(atob($('#ss_uk').val()));
-                        var jp_s = JSON.parse(atob($('#ss_jp').val()));
+                        var eu_s = JSON.parse(atob($('#ss_eu_i').val()));
+                        var us_s = JSON.parse(atob($('#ss_us_i').val()));
+                        var uk_s = JSON.parse(atob($('#ss_uk_i').val()));
+                        var jp_s = JSON.parse(atob($('#ss_jp_i').val()));
 
                         // set default/selected sizes
                         var def_setting = $('#ss_size_desig').val();
@@ -147,8 +147,15 @@ if (!trait_exists('SS_Product_Single')) :
                             $(this).addClass('ss_active');
                             var selected = $(this).text();
 
+                            console.log(selected);
+                            
+
                             // set EU sizes
                             if (selected === 'EU') {
+
+console.log(eu_s);
+
+
                                 $('.product-variations.list-type.pa_size > button').each(function(i, el) {
                                     $(el).text(eu_s[i]);
                                 })

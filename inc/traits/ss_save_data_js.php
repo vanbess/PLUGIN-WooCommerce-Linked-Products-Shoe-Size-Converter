@@ -83,6 +83,11 @@ if (!trait_exists('SS_Save_Data_JS')) :
                         };
 
                         $.post(ajaxurl, data, function(response) {
+                            
+                            // debug
+                            console.log(response);
+                            return;
+                            
                             if (response.success) {
                                 alert('Data successfully saved.');
                             } else {

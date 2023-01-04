@@ -15,6 +15,10 @@ if (!trait_exists('SS_Save_Data')) :
 
             check_ajax_referer('ss save shoe sizes');
 
+            // debug
+            // wp_send_json($_POST);
+            // wp_die();
+
             // grab subbed values
             $prod_id = isset($_POST['prod_id']) ? $_POST['prod_id'] : false;
             $eu_data = isset($_POST['eu_data']) ? $_POST['eu_data'] : false;
@@ -59,6 +63,7 @@ if (!trait_exists('SS_Save_Data')) :
                         continue;
                     endif;
 
+                    $eu_linked_uppded[] = update_post_meta($l_id, 'ss_eu_data', maybe_serialize($eu_data));
                     $us_linked_uppded[] = update_post_meta($l_id, 'ss_us_data', maybe_serialize($us_data));
                     $uk_linked_uppded[] = update_post_meta($l_id, 'ss_uk_data', maybe_serialize($uk_data));
                     $jp_linked_uppded[] = update_post_meta($l_id, 'ss_jp_data', maybe_serialize($jp_data));
@@ -68,10 +73,10 @@ if (!trait_exists('SS_Save_Data')) :
             endif;
 
             // send error/success message
-            if (!empty($us_linked_uppded) || !empty($uk_linked_uppded) || !empty($jp_linked_uppded)) :
-                wp_send_json_success([$us_linked_uppded, $uk_linked_uppded, $jp_linked_uppded]);
+            if (!empty($us_linked_uppded) || !empty($uk_linked_uppded) || !empty($jp_linked_uppded) || !empty($eu_linked_uppded)) :
+                wp_send_json_success([$us_linked_uppded, $uk_linked_uppded, $jp_linked_uppded, $eu_linked_uppded]);
             else :
-                wp_send_json_error([$us_linked_uppded, $uk_linked_uppded, $jp_linked_uppded]);
+                wp_send_json_error([$us_linked_uppded, $uk_linked_uppded, $jp_linked_uppded, $eu_linked_uppded]);
             endif;
 
             wp_die();
