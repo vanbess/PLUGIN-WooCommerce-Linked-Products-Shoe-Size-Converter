@@ -17,14 +17,20 @@ if (!trait_exists('SS_Save_Data')) :
 
             // grab subbed values
             $prod_id = isset($_POST['prod_id']) ? $_POST['prod_id'] : false;
+            $eu_data = isset($_POST['eu_data']) ? $_POST['eu_data'] : false;
             $us_data = isset($_POST['us_data']) ? $_POST['us_data'] : false;
             $uk_data = isset($_POST['gb_data']) ? $_POST['gb_data'] : false;
             $jp_data = isset($_POST['jp_data']) ? $_POST['jp_data'] : false;
+            $enabled = $_POST['enable_disable'];
 
             // save subbed values to product
+            $eu_uppded = update_post_meta($prod_id, 'ss_eu_data', maybe_serialize($eu_data));
             $us_uppded = update_post_meta($prod_id, 'ss_us_data', maybe_serialize($us_data));
             $uk_uppded = update_post_meta($prod_id, 'ss_uk_data', maybe_serialize($uk_data));
             $jp_uppded = update_post_meta($prod_id, 'ss_jp_data', maybe_serialize($jp_data));
+
+            // enabled/disabled
+            update_post_meta($prod_id, 'ss_enabled', $enabled);
 
             // get linked product ids
             $linked_prod_data = get_option('plgfymao_all_rulesplgfyplv');

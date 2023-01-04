@@ -63,10 +63,10 @@ if (!trait_exists('SS_Save_Data_JS')) :
                         eu_data_length = eu_data.length;
 
                         // throw error if any matching sizes missing and bail
-                        // if (jp_data.length !== eu_data_length || gb_data.length !== eu_data_length || us_data.length !== eu_data_length) {
-                        //     alert('<?php _e('Matching size data only partially complete! Please be sure to supply ALL matching measurements before saving.', 'woocommerce'); ?>');
-                        //     return;
-                        // }
+                        if (jp_data.length !== eu_data_length || gb_data.length !== eu_data_length || us_data.length !== eu_data_length) {
+                            alert('<?php _e('Matching size data only partially complete! Please be sure to supply ALL matching measurements before saving.', 'woocommerce'); ?>');
+                            return;
+                        }
 
                         // send ajax request to save data
                         var ajaxurl = '<?php echo admin_url('admin-ajax.php') ?>';
@@ -78,11 +78,16 @@ if (!trait_exists('SS_Save_Data_JS')) :
                             'eu_data': eu_data,
                             'us_data': us_data,
                             'gb_data': gb_data,
-                            'jp_data': jp_data
+                            'jp_data': jp_data,
+                            'enable_disable': $('#ss_enable_disable').is(':checked') ? 'on' : 'off'
                         };
 
                         $.post(ajaxurl, data, function(response) {
-                            console.log(response);
+                            if (response.success) {
+                                alert('Data successfully saved.');
+                            } else {
+                                alert('Data could not be saved. See browser console for details.');
+                            }
                         });
 
                     });
