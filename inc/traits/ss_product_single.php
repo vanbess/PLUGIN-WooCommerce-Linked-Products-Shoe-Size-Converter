@@ -61,20 +61,17 @@ if (!trait_exists('SS_Product_Single')) :
                         to_append += '<button id="ss_jp">JP</button>';
                         to_append += '</span>';
 
-                        $('.product-variations.list-type.pa_size').append(to_append);
-
-                        console.log('wtf');
-
-
+                        $('.product-variations.list-type.pa_size').prepend(to_append);
 
                     });
                 </script>
 
                 <style>
                     span#ss_btns_cont {
-                        display: inline;
+                        display: block;
                         border: none;
                         padding: 0;
+                        height: 45px;
                     }
 
                     span#ss_btns_cont>button {
@@ -84,6 +81,7 @@ if (!trait_exists('SS_Product_Single')) :
                         color: white;
                         transition: 0.2s;
                         cursor: pointer;
+                        float: left;
                     }
 
                     span#ss_btns_cont:hover {
